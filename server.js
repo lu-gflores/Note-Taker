@@ -6,6 +6,19 @@ const PORT = 8080;
 //serve static files in public folder
 app.use(express.static('public'));
 
+//read db.json and return all saved notes as JSON
+app.get('/api/notes', (req, res) => {
+    
+})
+
+//add note to db.json and return note to user
+app.post('/api/notes', (req, res) => {
+
+})
+
+app.delete('/api/notes/:id', (req, res) => {
+    
+})
 
 //routes
 app.get('*', (req, res)=> {
