@@ -1,5 +1,6 @@
 const express= require('express');
 const fs = require('fs');
+const path = require('path')
 const app = express();
 const PORT = 8080;
 
@@ -26,19 +27,12 @@ app.delete('/api/notes/:id', (req, res) => {
 
 //routes
 app.get('*', (req, res)=> {
-    return fs.readFile(__dirname + '/public/index.html', (err, html) => {
-        if (err) throw err;
-        res.writeHead(200, {"Content-Type": "text/html"});
-        res.end(html);
-    })
+    res.sendfile(path.join(__dirname + '/public/index.html'))
 });
 
 app.get('/notes', (req, res) => {
-    return fs.readFile(__dirname + '/public/notes.html', (err, html) => {
-        if (err) throw err;
-        res.writeHead(200, {"Content-Type": "text/html"});
-        res.end(html);
-    })
+    res.sendfile(path.join(__dirname + "/public/notes.html"))
+
 })
 
 //PORT listener
