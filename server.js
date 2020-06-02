@@ -15,15 +15,15 @@ app.use(express.json());
 
 //read db.json and return all saved notes as JSON
 app.get('/api/notes', function(req, res) {
-    // fs.readFile('db/db.json', 'utf8');
-    // res.json()
+    res.sendFile(path.join(__dirname, '/db/db.json'))
 })
 
 //add note to db.json and return note to user
 app.post('/api/notes', function(req, res) {
     let newNote = req.body; //save new note on body
+    
     userNotes.push(newNote);
-    res.json(newNote);
+    return res.json(newNote);
 })
 
 //remove note 
