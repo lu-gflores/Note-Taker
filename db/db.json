@@ -1,1 +1,18 @@
-[{"title":"Test Title","text":"Test text"},{"title":"324","text":"dfaf"}]
+[
+  {
+    "title": "Save test",
+    "text": "save test"
+  },
+  {
+    "title": "Test Note",
+    "text": "New note"
+  },
+  {
+    "title": "Save note",
+    "text": "save"
+  },
+  {
+    "title": "save note",
+    "text": "save note"
+  }
+]

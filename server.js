@@ -22,17 +22,29 @@ app.get('/api/notes', function(req, res) {
 app.post('/api/notes', function(req, res) {
     let newNote = req.body; //save new note on body
     let userNotes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
-    
     userNotes.push(newNote);
-    
-    fs.writeFile('./db/db.json', JSON.stringify(userNotes));
-    console.log('Saved notes: ' + newNote);
-    res.json(userNotes);
+
+    //writing notes to db.json
+    fs.writeFile('./db/db.json', JSON.stringify(userNotes, null, 2), (err) => {
+        if(err) throw err;
+    });
+    console.log('Saved notes: ' + JSON.stringify(newNote));
+    res.json(newNote);
 })
 
 //remove note 
 app.delete('/api/notes/:id', function(req, res) {
-    
+    //let delNote = req.params.id;
+    let userNotes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
+
+    userNotes = userNotes.filter(function (note) {
+        return note.id != req.params.id;
+    })
+
+    fs.writeFile('./db/db.json', JSON.stringify(userNotes, null, 2), (err) => {
+        if(err) throw err;
+    });
+    res.json(userNotes);
 })
 
 //html routes
