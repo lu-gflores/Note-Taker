@@ -2,9 +2,7 @@ const express= require('express');
 const fs = require('fs');
 const path = require('path')
 const app = express();
-const PORT = process.env.PORT || 3000;
-//may need for storing notes
-const storedNotes = [];
+const PORT = process.env.PORT || 8080;
 
 //serve static files in public folder
 app.use(express.static('public'));
@@ -34,16 +32,16 @@ app.post('/api/notes', function(req, res) {
 
 //remove note 
 app.delete('/api/notes/:id', function(req, res) {
-    //let delNote = req.params.id;
+    let delNote = req.params.id;
     let userNotes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
-
-    userNotes = userNotes.filter(function (note) {
-        return note.id != req.params.id;
-    })
-
+    userNotes.splice(delNote - 1, 1); //remove 
+    for(let i = 0; i < userNotes.length; i++) {
+        userNotes[i].id = 1 + i;
+    }
     fs.writeFile('./db/db.json', JSON.stringify(userNotes, null, 2), (err) => {
         if(err) throw err;
     });
+   
     res.json(userNotes);
 })
 
@@ -51,7 +49,6 @@ app.delete('/api/notes/:id', function(req, res) {
 app.get('*', function(req, res) {
     res.sendFile(path.join(__dirname + '/public/index.html'))
 });
-
 app.get('/notes', function(req, res) {
     res.sendFile(path.join(__dirname + "/public/notes.html"))
 })

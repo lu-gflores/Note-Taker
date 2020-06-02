@@ -1,18 +1,7 @@
 [
   {
-    "title": "Save test",
-    "text": "save test"
-  },
-  {
-    "title": "Test Note",
-    "text": "New note"
-  },
-  {
-    "title": "Save note",
-    "text": "save"
-  },
-  {
-    "title": "save note",
-    "text": "save note"
+    "title": "My Second note",
+    "text": "Second note",
+    "id": 1
   }
 ]
