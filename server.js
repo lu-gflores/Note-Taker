@@ -2,9 +2,9 @@ const express= require('express');
 const fs = require('fs');
 const path = require('path')
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT || 3000;
 //may need for storing notes
-const userNotes = [];
+const storedNotes = [];
 
 //serve static files in public folder
 app.use(express.static('public'));
@@ -21,9 +21,13 @@ app.get('/api/notes', function(req, res) {
 //add note to db.json and return note to user
 app.post('/api/notes', function(req, res) {
     let newNote = req.body; //save new note on body
+    let userNotes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
     
     userNotes.push(newNote);
-    return res.json(newNote);
+    
+    fs.writeFile('./db/db.json', JSON.stringify(userNotes));
+    console.log('Saved notes: ' + newNote);
+    res.json(userNotes);
 })
 
 //remove note 
@@ -42,5 +46,5 @@ app.get('/notes', function(req, res) {
 
 //PORT listener
 app.listen(PORT, function() {
-    console.log("Express App listening on PORT: " + PORT)
+    console.log("Server listening on PORT: " + PORT)
 })
