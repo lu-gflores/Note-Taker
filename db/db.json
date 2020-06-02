@@ -1,7 +1,10 @@
 [
   {
-    "title": "My Second note",
-    "text": "Second note",
-    "id": 1
+    "title": "My first Assignment",
+    "text": "Get it done!\n"
+  },
+  {
+    "title": "My Second assignment",
+    "text": "Get that one done too!"
   }
 ]
