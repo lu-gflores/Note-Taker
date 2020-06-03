@@ -42,10 +42,14 @@ app.post('/api/notes', function(req, res) {
 //remove note 
 app.delete('/api/notes/:id', function(req, res) {
     let delNote = req.params.id;
+    let newid = 0;
     let userNotes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
-    userNotes.splice(delNote - 1, 1); //remove 
-    for(let i = 0; i < userNotes.length; i++) {
-        userNotes[i].id = 1 + i;
+    
+    userNotes = userNotes.filter(note => note.id != delNote);
+
+    for(note of userNotes) {
+        note.id = newid.toString();
+        newid++;
     }
     fs.writeFile('./db/db.json', JSON.stringify(userNotes, null, 2), (err) => {
         if(err) throw err;
