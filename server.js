@@ -11,6 +11,14 @@ app.use(express.static('public'));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
+//html routes
+app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname + '/public/index.html'))
+});
+app.get('/notes', function(req, res) {
+    res.sendFile(path.join(__dirname + "/public/notes.html"))
+});
+
 //read db.json and return all saved notes as JSON
 app.get('/api/notes', function(req, res) {
     res.sendFile(path.join(__dirname, '/db/db.json'))
@@ -43,14 +51,6 @@ app.delete('/api/notes/:id', function(req, res) {
     });
    
     res.json(userNotes);
-})
-
-//html routes
-app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname + '/public/index.html'))
-});
-app.get('/notes', function(req, res) {
-    res.sendFile(path.join(__dirname + "/public/notes.html"))
 })
 
 //PORT listener

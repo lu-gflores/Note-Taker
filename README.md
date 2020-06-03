@@ -1,4 +1,7 @@
 # Note-Taker
+
+Deployed Link: https://server-note-taker.herokuapp.com/
+
 ![Note taker image](/public/assets/images/notetaker.jpg)
 
 
@@ -8,7 +11,6 @@ This application allows users to write, save, and delete notes which uses a expr
 ## Table of Contents
 
 * [Installation](#installation)
-* [Usage](#usage)
 * [Tests](#tests)
 * [Author](#author)
 
@@ -21,7 +23,7 @@ Install the dependencies by running the command:
 npm i 
 ```
 
-## Usage
+## Tests 
 Navigate to the project folder and run the server in Git bash:
 
 ```javascript
